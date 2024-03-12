@@ -89,6 +89,9 @@ ScriptsOnlyBuild:
     methodName: SetActive
   - assembly: Assembly-CSharp
     fullTypeName: SettingsManager
+    methodName: UpdateSpeed
+  - assembly: Assembly-CSharp
+    fullTypeName: SettingsManager
     methodName: SaveSettings
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
@@ -115,37 +118,37 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1580}
+      Script: {instanceID: 1598}
     - Class: 114
-      Script: {instanceID: 1702}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 2156}
+      Script: {instanceID: 2170}
     - Class: 114
-      Script: {instanceID: 2572}
+      Script: {instanceID: 2586}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2784}
     - Class: 114
-      Script: {instanceID: 3058}
+      Script: {instanceID: 3070}
     - Class: 114
-      Script: {instanceID: 4022}
+      Script: {instanceID: 3694}
     - Class: 114
-      Script: {instanceID: 4036}
+      Script: {instanceID: 4024}
     - Class: 114
-      Script: {instanceID: 4284}
+      Script: {instanceID: 4038}
     - Class: 114
-      Script: {instanceID: 4794}
+      Script: {instanceID: 4282}
     - Class: 114
-      Script: {instanceID: 4900}
+      Script: {instanceID: 4788}
     - Class: 114
-      Script: {instanceID: 4970}
+      Script: {instanceID: 4892}
     - Class: 114
-      Script: {instanceID: 5508}
+      Script: {instanceID: 4960}
     - Class: 114
-      Script: {instanceID: 5656}
+      Script: {instanceID: 5498}
     - Class: 114
-      Script: {instanceID: 5970}
+      Script: {instanceID: 5646}
     - Class: 114
-      Script: {instanceID: 24494}
+      Script: {instanceID: 5954}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -469,6 +472,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Flow
     namespaceName: Unity.VisualScripting
     className: ScriptGraphAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 75f8d52eee8d1c5e040990116412917d
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SettingsManager
   - hash:
       serializedVersion: 2
       Hash: fb79e95da8891fc7ac6c36ca6967af23
@@ -987,10 +996,16 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 75f8d52eee8d1c5e040990116412917d
+      Hash: 730ba12f13afcd4fcce03eaabf8becf5
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: SettingsManager
+    className: Settings
+  - hash:
+      serializedVersion: 2
+      Hash: 3e7e22b6c21731205ba102d9ea6f6c15
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: RefsManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
