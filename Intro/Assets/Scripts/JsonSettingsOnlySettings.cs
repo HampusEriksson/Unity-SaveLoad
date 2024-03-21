@@ -26,7 +26,18 @@ public class JsonSettingsOnlySettings : MonoBehaviour
 
     public void SaveHighscore(float newTime)
     {
-        // TODO: Implement highscore saving logic
+        username = RefsManager.username;
+        if (gameData.highScores.ContainsKey(username))
+        {
+            if (newTime < gameData.highScores[username])
+            {
+                gameData.highScores[username] = newTime;
+            }
+        }
+        else
+        {
+            gameData.highScores.Add(username, newTime);
+        }
         SaveSettings();
     }
 
