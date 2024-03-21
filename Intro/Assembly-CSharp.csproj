@@ -67,6 +67,10 @@
     <Compile Include="Assets\Scripts\JsonSettings.cs" />
     <Compile Include="Assets\Scripts\RefsManager.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
+    <Compile Include="Assets\Scripts\Car.cs" />
+    <Compile Include="Assets\Scripts\test.cs" />
+    <Compile Include="Assets\Scripts\SaveInfo.cs" />
+    <Compile Include="Assets\Scripts\JsonSettingsOnlySettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
