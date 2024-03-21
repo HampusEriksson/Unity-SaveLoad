@@ -2,85 +2,113 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using TMPro;
-using UnityEngine.UI;
 
-public class JsonSettings : MonoBehaviour
+public class JsonSettings
 {
-    private string saveFilePath;
-    
-    public TMP_InputField usernameInput;
-    public TextMeshProUGUI usernameDisplay;
+    private static string saveFilePath;
+    private static GameData gameData;
 
-    public Slider speedSlider;
-    public TextMeshProUGUI speedDisplay;
-
-    GameData gameData;
-
-    private void Start()
+    public static void Initialize()
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
-
-       
+        InitializeGameData();
         LoadGameData();
-
-        usernameDisplay.text = gameData.username;
-        speedSlider.value = gameData.speed;
-        UpdateSpeed();
-        
     }
 
-    public void UpdateSpeed()
+    private static void InitializeGameData()
     {
-        speedDisplay.text = speedSlider.value.ToString();
-        gameData.speed = (int)speedSlider.value;
+        if (!File.Exists(saveFilePath))
+        {
+            gameData = new GameData();
+            SaveSettings();
+        }
     }
 
-    public void UpdateUsername(){
-        gameData.username = usernameInput.text;
-        usernameDisplay.text = usernameInput.text;
-    }
-
-    public void SaveSettings()
-    { 
-        string jsonData = JsonUtility.ToJson(gameData);
-        File.WriteAllText(saveFilePath, jsonData);
-    }
-
-    public void LoadGameData()
+    private static void LoadGameData()
     {
         if (File.Exists(saveFilePath))
         {
             string jsonData = File.ReadAllText(saveFilePath);
-            gameData =  JsonUtility.FromJson<GameData>(jsonData);
+            gameData = JsonUtility.FromJson<GameData>(jsonData);
         }
         else
         {
-            File.Create(saveFilePath).Dispose();
-            gameData = new GameData();
-            string jsonData = JsonUtility.ToJson(gameData);
-            File.WriteAllText(saveFilePath, jsonData);
+            Debug.LogWarning("No save data found.");
         }
     }
+
+    public static string GetUsername()
+    {
+        return gameData.currentUsername;
+    }
+
+    public static void SetUsername(string newUsername)
+    {
+        gameData.currentUsername = newUsername;
+        SaveSettings();
+    }
+
+    public static float GetSpeed()
+    {
+        return gameData.speed;
+    }
+
+    public static void SetSpeed(float newSpeed)
+    {
+        gameData.speed = newSpeed;
+        SaveSettings();
+    }
+
+    public static string GetColor()
+    {
+        return gameData.color;
+    }
+
+    public static void SetColor(string newColor)
+    {
+        gameData.color = newColor;
+        SaveSettings();
+    }
+
+    public static void SaveHighscore(float newTime)
+    {
+        if (gameData.highScores.ContainsKey(gameData.currentUsername))
+        {
+            if (newTime < gameData.highScores[gameData.currentUsername])
+            {
+                gameData.highScores[gameData.currentUsername] = newTime;
+            }
+        }
+        else
+        {
+            gameData.highScores.Add(gameData.currentUsername, newTime);
+        }
+        SaveSettings();
+    }
+
+    public static Dictionary<string, float> GetHighscores()
+    {
+        return gameData.highScores;
+    }
+
+    public static void SaveSettings()
+    {
+        string jsonData = JsonUtility.ToJson(gameData);    
+        Debug.Log(jsonData);  
+        Debug.Log(gameData.highScores[gameData.currentUsername]);
+        File.WriteAllText(saveFilePath, jsonData);
+        
+    }
+
+    
+    
 }
 
-/*
-The class is marked with the attribute [System.Serializable], 
-which indicates that instances of this class can be serialized and deserialized,
-meaning they can be converted into a format that can be stored or transmitted 
-and then reconstructed back into an object later.
-*/
 [System.Serializable]
 public class GameData
 {
-    public string username;
-    public int speed;
-    public string[] inventory;
-
-    public GameData()
-   {
-      username = "";
-      speed = 1;
-   }
+    public string currentUsername = "";
+    public float speed = 1;
+    public string color = "white";
+    public Dictionary<string, float> highScores = new Dictionary<string, float>();
 }
-
