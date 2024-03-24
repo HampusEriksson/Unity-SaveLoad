@@ -15,7 +15,6 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         JsonSettings.Initialize();
-        JsonSettings.SaveHighscore(5.3f);
         usernameDisplay.text = JsonSettings.GetUsername();
         speedSlider.value =  JsonSettings.GetSpeed();
         speedDisplay.text = speedSlider.value.ToString();

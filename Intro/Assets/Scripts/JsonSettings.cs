@@ -70,38 +70,28 @@ public class JsonSettings
         SaveSettings();
     }
 
-    public static void SaveHighscore(float newTime)
+    public static void SetHighscore(float newTime)
     {
-        if (gameData.highScores.ContainsKey(gameData.currentUsername))
+        Highscore newHighscore = new Highscore
         {
-            if (newTime < gameData.highScores[gameData.currentUsername])
-            {
-                gameData.highScores[gameData.currentUsername] = newTime;
-            }
-        }
-        else
-        {
-            gameData.highScores.Add(gameData.currentUsername, newTime);
-        }
+            username = gameData.currentUsername,
+            time = newTime
+        };
+        gameData.highscores.Add(newHighscore);
         SaveSettings();
     }
 
-    public static Dictionary<string, float> GetHighscores()
+    public static List<Highscore> GetHighscores()
     {
-        return gameData.highScores;
+        return gameData.highscores;
     }
 
     public static void SaveSettings()
     {
         string jsonData = JsonUtility.ToJson(gameData);    
-        Debug.Log(jsonData);  
-        Debug.Log(gameData.highScores[gameData.currentUsername]);
         File.WriteAllText(saveFilePath, jsonData);
         
     }
-
-    
-    
 }
 
 [System.Serializable]
@@ -110,5 +100,12 @@ public class GameData
     public string currentUsername = "";
     public float speed = 1;
     public string color = "white";
-    public Dictionary<string, float> highScores = new Dictionary<string, float>();
+    public List<Highscore> highscores = new List<Highscore>();
+}
+
+[System.Serializable]
+public class Highscore
+{
+    public string username;
+    public float time;
 }
